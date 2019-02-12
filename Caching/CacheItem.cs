@@ -2,19 +2,35 @@
 
 namespace Caching
 {
-    public class CacheItem
+    /// <summary>
+    /// Describes cache items.
+    /// </summary>
+    internal class CacheItem
     {
         private readonly object item;
 
         private readonly DateTime expirationTime;
 
-        public CacheItem(object obj, int timeInSeconds)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CacheItem"/> class. 
+        /// </summary>
+        /// <param name="obj">
+        /// An object to store.
+        /// </param>
+        /// <param name="timeInSeconds">
+        /// Storage time in seconds.
+        /// </param>
+        internal CacheItem(object obj, int timeInSeconds)
         {
             this.item = obj;
             this.expirationTime = DateTime.UtcNow + new TimeSpan(0, 0, timeInSeconds);
         }
 
-        public object GetItem()
+        /// <summary>
+        /// Gets an object from the cache item.
+        /// </summary>
+        /// <returns>Cached object.</returns>
+        internal object GetItem()
         {
             if (DateTime.UtcNow > this.expirationTime)
             {
