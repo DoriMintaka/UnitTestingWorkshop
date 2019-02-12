@@ -51,5 +51,17 @@
             Thread.Sleep(1500);
             Assert.Throws<InvalidOperationException>(() => cache.GetItem("item1"));
         }
+
+        [Test]
+        public void GetItem_GetValidItem_ReturnItem()
+        {
+            this.dictionaryMock.Setup(x => x["item1"]).Returns(new CacheItem("content", 1));
+            this.dictionaryMock.Setup(x => x.ContainsKey("item1")).Returns(true);
+            this.dictionaryMock.Setup(x => x["item2"]).Returns(new CacheItem(3, 1));
+            this.dictionaryMock.Setup(x => x.ContainsKey("item2")).Returns(true);
+            Cache cache = new Cache(this.dictionaryMock.Object);
+            Assert.AreEqual("content", cache.GetItem("item1"));
+            Assert.AreEqual(3, cache.GetItem("item2"));
+        }
     }
 }
