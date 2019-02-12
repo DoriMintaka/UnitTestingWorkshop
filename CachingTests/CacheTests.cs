@@ -1,0 +1,7 @@
+﻿namespace CachingTests
+{
+    class CacheTests
+    {
+
+    }
+}
