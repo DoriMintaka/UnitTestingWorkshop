@@ -2,6 +2,8 @@
 
 namespace Caching
 {
+    using System.Diagnostics;
+
     /// <summary>
     /// Describes cache items.
     /// </summary>
@@ -22,6 +24,11 @@ namespace Caching
         /// </param>
         public CacheItem(object obj, int timeInSeconds)
         {
+            if (timeInSeconds < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
             this.item = obj;
             this.expirationTime = DateTime.UtcNow + new TimeSpan(0, 0, timeInSeconds);
         }
