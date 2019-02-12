@@ -5,7 +5,7 @@ namespace Caching
     /// <summary>
     /// Describes cache items.
     /// </summary>
-    internal class CacheItem
+    public class CacheItem
     {
         private readonly object item;
 
@@ -20,7 +20,7 @@ namespace Caching
         /// <param name="timeInSeconds">
         /// Storage time in seconds.
         /// </param>
-        internal CacheItem(object obj, int timeInSeconds)
+        public CacheItem(object obj, int timeInSeconds)
         {
             this.item = obj;
             this.expirationTime = DateTime.UtcNow + new TimeSpan(0, 0, timeInSeconds);
@@ -30,11 +30,11 @@ namespace Caching
         /// Gets an object from the cache item.
         /// </summary>
         /// <returns>Cached object.</returns>
-        internal object GetItem()
+        public object GetItem()
         {
             if (DateTime.UtcNow > this.expirationTime)
             {
-                throw new InvalidOperationException("Item expired");
+                throw new InvalidOperationException("Item expired.");
             }
 
             return this.item;

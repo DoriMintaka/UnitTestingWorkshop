@@ -8,14 +8,15 @@
     /// </summary>
     public class Cache
     {
-        private readonly Dictionary<string, CacheItem> cache;
+        private readonly IDictionary<string, CacheItem> cache;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Cache"/> class. 
         /// </summary>
-        public Cache()
+        /// <exception cref="ArgumentNullException">Thrown when dictionary is null.</exception>
+        public Cache(IDictionary<string, CacheItem> dictionary)
         {
-            this.cache = new Dictionary<string, CacheItem>();
+            this.cache = dictionary ?? throw new ArgumentNullException();
         }
 
         /// <summary>
